@@ -1,7 +1,12 @@
+import commands.Command;
+import commands.RegisteredCommands;
+
 public class Application {
     public static void main(String[] args) {
-        Command openCommand=new OpenCommand();
+        RegisteredCommands registeredCommand=new RegisteredCommands();
+        Command command =registeredCommand.getCommand("help");
         String filePath="example.json";
-        openCommand.execute(new String[]{filePath});
+        command.execute(filePath);
+
     }
 }
