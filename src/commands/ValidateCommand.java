@@ -2,7 +2,7 @@ package commands;
 
 import contracts.Command;
 
-public class CloseCommand implements Command {
+public class ValidateCommand implements Command {
     @Override
     public String execute(String params) {
         return "";
@@ -10,6 +10,6 @@ public class CloseCommand implements Command {
 
     @Override
     public String getDescription() {
-        return "close\tcloses currently opened file\n";
+        return "validate\tchecks if file is valid JSON and reports detailed errors\n";
     }
 }

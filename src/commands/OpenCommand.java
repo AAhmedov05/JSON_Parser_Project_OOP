@@ -1,18 +1,25 @@
 package commands;
 
+import contracts.Command;
+
 import java.io.*;
 
 public class OpenCommand implements Command {
     @Override
-    public void execute(String params) {
+    public String execute(String params) {
         File file=new File(params);
         try {
             if (!file.exists()) {
                 file.createNewFile();
             }
-            CommandsValidationMessages.fileOpened(file.getName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return "Successfully opened "+file.getName();
+    }
+
+    @Override
+    public String getDescription() {
+        return "open <file>\topens <file>\n";
     }
 }

@@ -2,14 +2,14 @@ package commands;
 
 import contracts.Command;
 
-public class CloseCommand implements Command {
+public class ExitCommand implements Command {
     @Override
     public String execute(String params) {
-        return "";
+        return "Exiting the program...";
     }
 
     @Override
     public String getDescription() {
-        return "close\tcloses currently opened file\n";
+        return "exit\texists the program\n";
     }
 }

@@ -2,7 +2,7 @@ package commands;
 
 import contracts.Command;
 
-public class CloseCommand implements Command {
+public class SearchCommand implements Command {
     @Override
     public String execute(String params) {
         return "";
@@ -10,6 +10,6 @@ public class CloseCommand implements Command {
 
     @Override
     public String getDescription() {
-        return "close\tcloses currently opened file\n";
+        return "search <key>\tfinds all values by key and lists them if present\n";
     }
 }

@@ -1,8 +1,15 @@
 package commands;
 
-public class SaveAsCommand implements Command{
+import contracts.Command;
+
+public class SaveAsCommand implements Command {
     @Override
-    public void execute(String params) {
-        
+    public String execute(String params) {
+        return "";
+    }
+
+    @Override
+    public String getDescription() {
+        return "save as <file>\tsaves the currently open file in <file>\n";
     }
 }
