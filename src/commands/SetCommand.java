@@ -1,8 +1,13 @@
 package commands;
 
 import contracts.Command;
+import session.FileSession;
 
-public class SetCommand implements Command {
+public class SetCommand extends Command {
+    public SetCommand(FileSession session) {
+        super(session);
+    }
+
     @Override
     public String execute(String params) {
         return "";

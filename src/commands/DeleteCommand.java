@@ -1,8 +1,13 @@
 package commands;
 
 import contracts.Command;
+import session.FileSession;
 
-public class DeleteCommand implements Command {
+public class DeleteCommand extends Command {
+    public DeleteCommand(FileSession session) {
+        super(session);
+    }
+
     @Override
     public String execute(String params) {
         return "";

@@ -1,8 +1,13 @@
 package commands;
 
 import contracts.Command;
+import session.FileSession;
 
-public class SearchCommand implements Command {
+public class SearchCommand extends Command {
+    public SearchCommand(FileSession session) {
+        super(session);
+    }
+
     @Override
     public String execute(String params) {
         return "";

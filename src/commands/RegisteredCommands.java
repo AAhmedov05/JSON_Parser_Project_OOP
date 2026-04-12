@@ -1,7 +1,9 @@
 package commands;
 
+import commands.base.*;
 import contracts.Command;
 import enums.CommandType;
+import session.FileSession;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,20 +15,20 @@ public class RegisteredCommands {
         return commandsList;
     }
 
-    public RegisteredCommands() {
-        this.commandsList.put(CommandType.OPEN, new OpenCommand());
-        this.commandsList.put(CommandType.CLOSE, new CloseCommand());
-        this.commandsList.put(CommandType.SAVE, new SaveCommand());
-        this.commandsList.put(CommandType.SAVE_AS, new SaveAsCommand());
-        this.commandsList.put(CommandType.HELP, new HelpCommand(this));
-        this.commandsList.put(CommandType.EXIT, new ExitCommand());
-        this.commandsList.put(CommandType.VALIDATE, new ValidateCommand());
-        this.commandsList.put(CommandType.PRINT, new PrintCommand());
-        this.commandsList.put(CommandType.SEARCH, new SearchCommand());
-        this.commandsList.put(CommandType.SET, new SetCommand());
-        this.commandsList.put(CommandType.CREATE, new CreateCommand());
-        this.commandsList.put(CommandType.DELETE, new DeleteCommand());
-        this.commandsList.put(CommandType.MOVE, new MoveCommand());
+    public RegisteredCommands(FileSession session) {
+        this.commandsList.put(CommandType.OPEN, new OpenCommand(session));
+        this.commandsList.put(CommandType.CLOSE, new CloseCommand(session));
+        this.commandsList.put(CommandType.SAVE, new SaveCommand(session));
+        this.commandsList.put(CommandType.SAVE_AS, new SaveAsCommand(session));
+        this.commandsList.put(CommandType.HELP, new HelpCommand(this,session));
+        this.commandsList.put(CommandType.EXIT, new ExitCommand(session));
+        this.commandsList.put(CommandType.VALIDATE, new ValidateCommand(session));
+        this.commandsList.put(CommandType.PRINT, new PrintCommand(session));
+        this.commandsList.put(CommandType.SEARCH, new SearchCommand(session));
+        this.commandsList.put(CommandType.SET, new SetCommand(session));
+        this.commandsList.put(CommandType.CREATE, new CreateCommand(session));
+        this.commandsList.put(CommandType.DELETE, new DeleteCommand(session));
+        this.commandsList.put(CommandType.MOVE, new MoveCommand(session));
     }
 
     public Command getCommand(String commandName){

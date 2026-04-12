@@ -1,14 +1,14 @@
-package commands;
+package commands.base;
 
+import commands.RegisteredCommands;
 import contracts.Command;
-import enums.CommandType;
+import session.FileSession;
 
-import java.util.Map;
-
-public class HelpCommand implements Command {
+public class HelpCommand extends Command {
     private RegisteredCommands registeredCommands;
 
-    public HelpCommand(RegisteredCommands registeredCommands) {
+    public HelpCommand(RegisteredCommands registeredCommands, FileSession session) {
+        super(session);
         this.registeredCommands = registeredCommands;
     }
 

@@ -1,10 +1,15 @@
-package commands;
+package commands.base;
 
 import contracts.Command;
+import session.FileSession;
 
 import java.io.*;
 
-public class OpenCommand implements Command {
+public class OpenCommand extends Command {
+    public OpenCommand(FileSession session) {
+        super(session);
+    }
+
     @Override
     public String execute(String params) {
         File file=new File(params);

@@ -1,5 +1,11 @@
 package json;
 
-public class JsonNull {
+import contracts.JsonValue;
 
+public class JsonNull implements JsonValue {
+
+    @Override
+    public String toJson(int indent) {
+        return "null";
+    }
 }

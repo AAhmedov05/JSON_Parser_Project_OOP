@@ -1,8 +1,13 @@
 package commands;
 
 import contracts.Command;
+import session.FileSession;
 
-public class ValidateCommand implements Command {
+public class ValidateCommand extends Command {
+    public ValidateCommand(FileSession session) {
+        super(session);
+    }
+
     @Override
     public String execute(String params) {
         return "";
