@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RegisteredCommands {
-    private Map<CommandType, Command> commandsList=new HashMap<>();;
+    private Map<CommandType, Command> commandsList=new HashMap<>();
 
     public Map<CommandType, Command> getCommandsList() {
         return commandsList;
