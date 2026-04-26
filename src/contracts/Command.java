@@ -9,6 +9,6 @@ public abstract class Command {
         this.session = session;
     }
 
-    public abstract String execute(String params);
+    public abstract String execute(String[] params);
     public abstract String getDescription();
 }

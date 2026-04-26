@@ -11,16 +11,14 @@ public class OpenCommand extends Command {
     }
 
     @Override
-    public String execute(String params) {
-        File file=new File(params);
+    public String execute(String[] params) {
+        if (params.length < 2) return this.getDescription();
         try {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
+            session.openFile(params[1]);
+            return "File opened successfully.";
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            return "Failed to open file: " + e.getMessage();
         }
-        return "Successfully opened "+file.getName();
     }
 
     @Override

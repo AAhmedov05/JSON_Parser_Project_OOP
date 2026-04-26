@@ -9,7 +9,7 @@ public class CloseCommand extends Command {
     }
 
     @Override
-    public String execute(String params) {
+    public String execute(String[] params) {
         if (!session.isOpen())
             return "No file is currently open.";
         String fileName= session.getFilePath();

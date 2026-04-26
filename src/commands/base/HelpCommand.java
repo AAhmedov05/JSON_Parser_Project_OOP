@@ -13,7 +13,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public String execute(String params) {
+    public String execute(String[] params) {
         StringBuilder sb=new StringBuilder();
         for (Command command:this.registeredCommands.getCommandsList().values()){
             sb.append(command.getDescription());

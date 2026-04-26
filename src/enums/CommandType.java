@@ -30,7 +30,7 @@ public enum CommandType {
             case "create" -> CREATE;
             case "delete" -> DELETE;
             case "move" -> MOVE;
-            default -> throw new IllegalArgumentException("Unknown command");
+            default -> null;
         };
     }
 }

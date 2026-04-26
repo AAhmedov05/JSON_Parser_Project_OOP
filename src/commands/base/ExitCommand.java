@@ -9,7 +9,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public String execute(String params) {
+    public String execute(String[] params) {
         session.closeFile();
         return "Exiting the program...";
     }

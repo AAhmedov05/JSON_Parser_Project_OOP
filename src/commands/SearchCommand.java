@@ -9,7 +9,7 @@ public class SearchCommand extends Command {
     }
 
     @Override
-    public String execute(String params) {
+    public String execute(String[] params) {
         return "";
     }
 
