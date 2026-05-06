@@ -28,4 +28,8 @@ public class JsonObject implements JsonValue {
         sb.append(" ".repeat(indent)).append("}");
         return sb.toString();
     }
+
+    public void put(String key, JsonValue value) {
+        this.objects.put(key, value);
+    }
 }
