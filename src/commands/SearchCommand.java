@@ -1,11 +1,12 @@
 package commands;
 
 import contracts.Command;
+import core.JsonService;
 import session.FileSession;
 
 public class SearchCommand extends Command {
-    public SearchCommand(FileSession session) {
-        super(session);
+    public SearchCommand(JsonService service) {
+        super(service);
     }
 
     @Override

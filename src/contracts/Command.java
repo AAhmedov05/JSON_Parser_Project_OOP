@@ -1,12 +1,16 @@
 package contracts;
 
-import session.FileSession;
+import core.JsonService;
 
 public abstract class Command {
-    protected FileSession session;
+    private JsonService jsonService;
 
-    public Command(FileSession session) {
-        this.session = session;
+    public JsonService getJsonService() {
+        return jsonService;
+    }
+
+    public Command(JsonService jsonService) {
+        this.jsonService = jsonService;
     }
 
     public abstract String execute(String[] params);

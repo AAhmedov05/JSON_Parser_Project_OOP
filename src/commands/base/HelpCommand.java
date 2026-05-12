@@ -2,13 +2,14 @@ package commands.base;
 
 import commands.RegisteredCommands;
 import contracts.Command;
+import core.JsonService;
 import session.FileSession;
 
 public class HelpCommand extends Command {
     private RegisteredCommands registeredCommands;
 
-    public HelpCommand(RegisteredCommands registeredCommands, FileSession session) {
-        super(session);
+    public HelpCommand(RegisteredCommands registeredCommands, JsonService service) {
+        super(service);
         this.registeredCommands = registeredCommands;
     }
 

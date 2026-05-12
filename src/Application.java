@@ -1,12 +1,14 @@
 import contracts.Command;
 import commands.RegisteredCommands;
+import core.JsonService;
 import session.FileSession;
 import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
         FileSession session=new FileSession();
-        RegisteredCommands registeredCommand=new RegisteredCommands(session);
+        JsonService service=new JsonService(session);
+        RegisteredCommands registeredCommand=new RegisteredCommands(service);
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Type help to see all commands!");

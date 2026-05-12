@@ -1,16 +1,19 @@
 package commands;
 
 import contracts.Command;
+import core.JsonService;
 import session.FileSession;
 
 public class PrintCommand extends Command {
-    public PrintCommand(FileSession session) {
-        super(session);
+    public PrintCommand(JsonService service) {
+        super(service);
     }
 
     @Override
     public String execute(String[] params) {
-        return "";
+        if (!getJsonService().getSession().isOpen())
+            return "No file is currently open.";
+        return getJsonService().print();
     }
 
     @Override

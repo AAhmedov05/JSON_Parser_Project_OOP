@@ -1,11 +1,12 @@
 package commands;
 
 import contracts.Command;
+import core.JsonService;
 import session.FileSession;
 
 public class MoveCommand extends Command {
-    public MoveCommand(FileSession session) {
-        super(session);
+    public MoveCommand(JsonService service) {
+        super(service);
     }
 
     @Override

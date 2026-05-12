@@ -1,11 +1,12 @@
 package commands;
 
 import contracts.Command;
+import core.JsonService;
 import session.FileSession;
 
 public class DeleteCommand extends Command {
-    public DeleteCommand(FileSession session) {
-        super(session);
+    public DeleteCommand(JsonService service) {
+        super(service);
     }
 
     @Override

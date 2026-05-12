@@ -1,11 +1,14 @@
 package commands.base;
 
 import contracts.Command;
+import core.JsonService;
 import session.FileSession;
 
+import java.io.IOException;
+
 public class SaveAsCommand extends Command {
-    public SaveAsCommand(FileSession session) {
-        super(session);
+    public SaveAsCommand(JsonService service) {
+        super(service);
     }
 
     @Override
