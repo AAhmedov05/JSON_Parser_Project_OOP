@@ -1,5 +1,6 @@
 package core;
 
+import exceptions.FileException;
 import json.*;
 import session.FileSession;
 
@@ -16,5 +17,10 @@ public class JsonService {
 
     public String print(){
         return session.getJsonRoot().toJson(0);
+    }
+
+    public void isJsonOpen(){
+        if (!session.isOpen())
+            throw new FileException("No file is currently open");
     }
 }

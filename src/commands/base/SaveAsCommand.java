@@ -2,7 +2,6 @@ package commands.base;
 
 import contracts.Command;
 import core.JsonService;
-import session.FileSession;
 
 import java.io.IOException;
 
@@ -13,11 +12,22 @@ public class SaveAsCommand extends Command {
 
     @Override
     public String execute(String[] params) {
-        return "";
+        getJsonService().isJsonOpen();
+        try {
+            if (params.length==2)
+                getJsonService().getSession().saveAs(params[1]);
+            else if(params.length==3)
+                getJsonService().getSession().saveAs(params[1],params[2]);
+            else
+                return  this.getDescription();
+        } catch (IOException e) {
+            return e.getMessage();
+        }
+        return "Successfully saved "+params[1];
     }
 
     @Override
     public String getDescription() {
-        return "save as <file>\tsaves the currently open file in <file>\n";
+        return "save as <file>\tsaves the currently open file in <file>\nsave as <file> [<path>]\tsaves object to <file>\n";
     }
 }
