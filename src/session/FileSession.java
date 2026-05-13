@@ -1,13 +1,16 @@
 package session;
 
 import contracts.JsonValue;
+import core.PathResolver;
+import exceptions.FileException;
+import json.JsonObject;
+import parser.JsonParser;
 
 import java.io.*;
 
 public class FileSession {
     private String filePath;
     private JsonValue jsonRoot;
-    private String content;
     private boolean isOpen;
 
     public String getFilePath() {
@@ -27,11 +30,10 @@ public class FileSession {
 
         if (!file.exists()) {
             file.createNewFile();
-            content = "";
+            this.jsonRoot=new JsonObject();
         } else {
-            content = readFromFile(file);
+            jsonRoot=new JsonParser().parse(readFromFile(file));
         }
-
         this.filePath = path;
         this.isOpen = true;
     }
@@ -45,13 +47,53 @@ public class FileSession {
     private String readFromFile(File file) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         StringBuilder sb = new StringBuilder();
-
         String line;
         while ((line = reader.readLine()) != null) {
             sb.append(line).append("\n");
         }
-
         reader.close();
         return sb.toString();
+    }
+
+    public void save() throws IOException {
+        writeToFile(this.filePath, jsonRoot.toJson(0));
+    }
+
+    public void saveAs(String newPath) throws IOException {
+        writeToFile(newPath, jsonRoot.toJson(0));
+    }
+
+    public void saveAs(String newPath, String path) throws IOException {
+        if (!isOpen) {
+            throw new FileException("No file is currently open.");
+        }
+        if (path == null || path.isEmpty()) {
+            saveAs(newPath);
+            return;
+        }
+        JsonValue element = PathResolver.resolve(jsonRoot, path);
+        if (element == null) {
+            throw new FileException("Invalid path: " + path);
+        }
+        JsonValue toSave = element;
+        String lastPart = path;
+        if (path.contains(".")) {
+            lastPart = path.substring(path.lastIndexOf('.') + 1);
+        }
+        if (lastPart.contains("[")) {
+            lastPart = lastPart.substring(0, lastPart.indexOf('['));
+        }
+        if (!lastPart.isEmpty() && !lastPart.matches("\\d+")) {
+            JsonObject wrapper = new JsonObject();
+            wrapper.put(lastPart, element);
+            toSave = wrapper;
+        }
+        writeToFile(newPath, toSave.toJson(0));
+    }
+
+    private void writeToFile(String path, String content) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(path));
+        writer.write(content != null ? content : "");
+        writer.close();
     }
 }
