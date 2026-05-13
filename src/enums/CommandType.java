@@ -1,5 +1,8 @@
 package enums;
 
+/**
+ * Represents all supported command types in the system.
+ */
 public enum CommandType {
     OPEN,
     CLOSE,
@@ -15,7 +18,13 @@ public enum CommandType {
     DELETE,
     MOVE;
 
-    public static CommandType fromString(String input) {
+    /**
+     * Converts a string into a CommandType.
+     * @param input the command name as text
+     * @return the matching CommandType
+     * @throws Exception if the command is unknown
+     */
+    public static CommandType fromString(String input) throws Exception {
         return switch (input.toLowerCase()) {
             case "open" -> OPEN;
             case "close" -> CLOSE;
@@ -30,7 +39,7 @@ public enum CommandType {
             case "create" -> CREATE;
             case "delete" -> DELETE;
             case "move" -> MOVE;
-            default -> null;
+            default -> throw new Exception("Unknown Command " + input + ". Type 'help' for a list of available commands.");
         };
     }
 }
