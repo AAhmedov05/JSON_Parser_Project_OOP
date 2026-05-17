@@ -1,5 +1,7 @@
 package enums;
 
+import exceptions.InvalidCommandException;
+
 /**
  * Represents all supported command types in the system.
  */
@@ -22,7 +24,7 @@ public enum CommandType {
      * Converts a string into a CommandType.
      * @param input the command name as text
      * @return the matching CommandType
-     * @throws Exception if the command is unknown
+     * @throws InvalidCommandException if the command is unknown
      */
     public static CommandType fromString(String input) throws Exception {
         return switch (input.toLowerCase()) {
@@ -39,7 +41,7 @@ public enum CommandType {
             case "create" -> CREATE;
             case "delete" -> DELETE;
             case "move" -> MOVE;
-            default -> throw new Exception("Unknown Command " + input + ". Type 'help' for a list of available commands.");
+            default -> throw new InvalidCommandException("Unknown Command " + input + ". Type 'help' for a list of available commands.");
         };
     }
 }

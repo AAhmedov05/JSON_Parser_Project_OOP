@@ -2,6 +2,7 @@ package commands.base;
 
 import contracts.Command;
 import core.JsonService;
+import exceptions.InvalidCommandException;
 
 /**
  * Command that closes the currently opened JSON file session.
@@ -9,14 +10,15 @@ import core.JsonService;
  * If no file is open, a message is returned.
  * This command does not require parameters.
  */
-public class CloseCommand extends Command {
+public class CloseCommand implements Command {
+    private JsonService service;
 
     /**
      * Creates a CloseCommand with the given JSON service.
      * @param service the JSON service used for the session
      */
     public CloseCommand(JsonService service) {
-        super(service);
+        this.service = service;
     }
 
     /**
@@ -29,13 +31,13 @@ public class CloseCommand extends Command {
      */
     @Override
     public String execute(String[] params) {
-        getJsonService().isJsonOpen();
+        service.isJsonOpen();
 
-        if (params.length > 1)
-            return this.getDescription();
+        if (params.length != 1)
+            throw new InvalidCommandException(this.getDescription());
 
-        String fileName = getJsonService().getSession().getFilePath();
-        getJsonService().getSession().closeFile();
+        String fileName = service.getSession().getFilePath();
+        service.getSession().closeFile();
 
         return "Successfully closed " + fileName;
     }

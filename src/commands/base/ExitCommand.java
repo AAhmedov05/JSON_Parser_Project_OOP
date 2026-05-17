@@ -1,22 +1,14 @@
 package commands.base;
 
 import contracts.Command;
-import core.JsonService;
+import exceptions.InvalidCommandException;
 
 /**
  * Command that exits the application.
  * <p>
  * It prints a message when the program is shutting down.
  */
-public class ExitCommand extends Command {
-
-    /**
-     * Creates an ExitCommand.
-     * @param service the JSON service (not used)
-     */
-    public ExitCommand(JsonService service) {
-        super(service);
-    }
+public class ExitCommand implements Command {
 
     /**
      * Executes the exit command.
@@ -25,6 +17,9 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(String[] params) {
+        if (params.length != 1)
+            throw new InvalidCommandException(this.getDescription());
+
         return "Exiting the program...";
     }
 
@@ -34,6 +29,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public String getDescription() {
-        return "exit\texists the program\n";
+        return "exit\texits the program\n";
     }
 }

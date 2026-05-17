@@ -14,15 +14,10 @@ public class Application {
         System.out.println("Type help to see all commands!");
         while (true) {
             String input = scanner.nextLine().trim();
-            String[] parts = input.split("\\s+");
+            String[] parts = input.split("\\s+(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
             String commandName = parts[0];
-            Command command = registeredCommand.getCommand(commandName);
-
-            if (command == null) {
-                System.out.println("Unknown command");
-                continue;
-            }
             try {
+                Command command = registeredCommand.getCommand(commandName);
                 String result = command.execute(parts);
                 if (result != null)
                     System.out.println(result);

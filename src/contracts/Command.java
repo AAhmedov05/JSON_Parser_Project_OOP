@@ -1,18 +1,22 @@
 package contracts;
 
-import core.JsonService;
+/**
+ * Represents a system command.
+ */
+public interface Command {
 
-public abstract class Command {
-    private JsonService jsonService;
+    /**
+     * Executes the command.
+     *
+     * @param params command arguments
+     * @return result message
+     */
+    String execute(String[] params);
 
-    public JsonService getJsonService() {
-        return jsonService;
-    }
-
-    public Command(JsonService jsonService) {
-        this.jsonService = jsonService;
-    }
-
-    public abstract String execute(String[] params);
-    public abstract String getDescription();
+    /**
+     * Returns command usage.
+     *
+     * @return description text
+     */
+    String getDescription();
 }

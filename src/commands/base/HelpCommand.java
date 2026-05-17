@@ -2,25 +2,22 @@ package commands.base;
 
 import commands.RegisteredCommands;
 import contracts.Command;
-import core.JsonService;
-import session.FileSession;
+import exceptions.InvalidCommandException;
 
 /**
  * Command that shows all available commands.
  * <p>
  * It prints the descriptions of all registered commands.
  */
-public class HelpCommand extends Command {
+public class HelpCommand implements Command {
 
     private RegisteredCommands registeredCommands;
 
     /**
-     * Creates a HelpCommand with the given command registry and JSON service.
+     * Creates a HelpCommand with the given command registry 
      * @param registeredCommands the registry of all commands
-     * @param service the JSON service used by the command
      */
-    public HelpCommand(RegisteredCommands registeredCommands, JsonService service) {
-        super(service);
+    public HelpCommand(RegisteredCommands registeredCommands) {
         this.registeredCommands = registeredCommands;
     }
 
@@ -33,8 +30,11 @@ public class HelpCommand extends Command {
      */
     @Override
     public String execute(String[] params) {
-        StringBuilder sb=new StringBuilder();
-        for (Command command : this.registeredCommands.getCommandsList().values()) {
+        if (params.length != 1)
+            throw new InvalidCommandException(this.getDescription());
+
+        StringBuilder sb = new StringBuilder();
+        for (Command command : registeredCommands.getCommandsList().values()) {
             sb.append(command.getDescription());
         }
         return sb.toString();

@@ -4,25 +4,36 @@ import commands.base.*;
 import contracts.Command;
 import core.JsonService;
 import enums.CommandType;
-import session.FileSession;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Holds and provides all registered commands.
+ */
 public class RegisteredCommands {
+    /**
+     * Map that stores all registered commands.
+     */
     private Map<CommandType, Command> commandsList=new HashMap<>();
 
+    /**
+     * Returns all registered commands.
+     */
     public Map<CommandType, Command> getCommandsList() {
         return commandsList;
     }
 
+    /**
+     * Initializes all available commands.
+     */
     public RegisteredCommands(JsonService service) {
         this.commandsList.put(CommandType.OPEN, new OpenCommand(service));
         this.commandsList.put(CommandType.CLOSE, new CloseCommand(service));
         this.commandsList.put(CommandType.SAVE, new SaveCommand(service));
         this.commandsList.put(CommandType.SAVE_AS, new SaveAsCommand(service));
-        this.commandsList.put(CommandType.HELP, new HelpCommand(this,service));
-        this.commandsList.put(CommandType.EXIT, new ExitCommand(service));
+        this.commandsList.put(CommandType.HELP, new HelpCommand(this));
+        this.commandsList.put(CommandType.EXIT, new ExitCommand());
         this.commandsList.put(CommandType.VALIDATE, new ValidateCommand(service));
         this.commandsList.put(CommandType.PRINT, new PrintCommand(service));
         this.commandsList.put(CommandType.SEARCH, new SearchCommand(service));
@@ -32,7 +43,10 @@ public class RegisteredCommands {
         this.commandsList.put(CommandType.MOVE, new MoveCommand(service));
     }
 
-    public Command getCommand(String commandName){
+    /**
+     * Finds a command by its name.
+     */
+    public Command getCommand(String commandName) throws Exception {
         return this.commandsList.get(CommandType.fromString(commandName));
     }
 }
