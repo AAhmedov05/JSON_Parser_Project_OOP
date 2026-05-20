@@ -71,10 +71,22 @@ public class JsonString implements JsonValue {
     /**
      * Converts string to JSON format
      * @param indent indentation level (unused)
-     * @return JSON string
+     * @return JSON-escaped string
      */
     @Override
     public String toJson(int indent) {
-        return "\""+this.value+"\"";
+        return "\"" + escape(value) + "\"";
+    }
+
+    /**
+     * Escapes special characters for JSON output.
+     */
+    private String escape(String text) {
+        return text
+                .replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\n", "\\n")
+                .replace("\t", "\\t")
+                .replace("\r", "\\r");
     }
 }

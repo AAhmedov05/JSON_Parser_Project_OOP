@@ -33,8 +33,10 @@ public class SaveCommand implements Command {
         try {
             if (params.length == 1)
                 service.getSession().save();
-            else if (params.length == 2)
+            else if (params.length == 2){
                 service.getSession().saveAs(params[1]);
+                return "Successfully saved " + params[1];
+            }
             else
                 throw new InvalidCommandException(this.getDescription());
 

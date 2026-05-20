@@ -37,7 +37,7 @@ public class SetCommand implements Command {
             throw new InvalidCommandException(this.getDescription());
 
         String path = params[1];
-        String valueStr = String.join(" ", Arrays.copyOfRange(params, 2, params.length));
+        String valueStr = params[2];
         JsonValue value = new JsonParser().parse(valueStr);
 
         return service.set(path, value);

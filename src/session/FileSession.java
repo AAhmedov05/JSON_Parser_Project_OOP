@@ -62,7 +62,8 @@ public class FileSession {
                     throw new FileException("JSON file must start with { or [");
                 }
             } else {
-                writeToFile(path, new JsonObject().toJson(0));
+                this.jsonRoot=new JsonObject();
+                writeToFile(path, this.jsonRoot.toJson(0));
             }
         }
 

@@ -65,7 +65,7 @@ public class JsonService {
     public String validate() {
         try {
             new JsonParser().parse(session.getJsonRoot().toJson(0));
-            return "valid";
+            return "It is valid";
         } catch (JsonServiceException e) {
             throw new JsonServiceException(e.getMessage());
         }
@@ -133,8 +133,8 @@ public class JsonService {
      */
     public String move(String from, String to) {
         JsonValue value = PathResolver.resolve(session.getJsonRoot(), from);
-        delete(from);
         create(to, value);
+        delete(from);
         return "Moved successfully";
     }
 }
